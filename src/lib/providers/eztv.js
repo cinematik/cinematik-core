@@ -1,6 +1,7 @@
 // Global Provider Dependencies
 var inherit = require('inherit');
 var bases = require('./base');
+var Media = require('../media');
 
 // Local Provider Dependencies
 var cheerio = require('cheerio');
@@ -36,7 +37,22 @@ var EZTVProvider = inherit(bases.MediaProvider, {
 		var showTitles = Object.keys(this.showlist);
 		results = difflib.getCloseMatches(string, showTitles, 1000);
 		
+		for (r in results) {
+			var result = results[r];
+			item = this.showlist[result];
+			console.log("result", result);
+			results[r] = this._getMediaFromItem(result, item.find('a').text());
+		}
+
 		return results;
+	},
+
+	_getMediaFromItem: function(title, uri) {
+		var media = new Media();
+		media.provider.media = {'id' : this.id, 'key' : uri};
+		media.title = title;
+		media.type = 'tv show';
+		return media;
 	},
 
 	_getShowList : function() {
