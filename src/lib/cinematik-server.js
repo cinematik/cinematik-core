@@ -1,6 +1,7 @@
 "use strict";
 
 var express = require('express');
+var cinematik = require('./cinematik-core');
 
 function convertThis() {
 	var app = express();
@@ -11,7 +12,6 @@ function convertThis() {
 		var query = req.query.query;
 		console.log('Searching for '+query);
 
-		var cinematik = require('./cinematik-core');
 		var results = cinematik.search(query);
 		res.json(results);
 	});
