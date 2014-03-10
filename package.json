@@ -1,0 +1,32 @@
+{
+  "author": "snipebin",
+  "name": "cinematik-core",
+  "description": "Web Media Library Module and Service",
+  "version": "0.0.1",
+  "private" : true,
+  "repository": {
+    "url": ""
+  },
+  "main": "./lib/cinamtik-core.js",
+  "keywords": [
+    "torrent",
+    "streamer",
+    "movies"
+  ],
+  "bin": {
+    "cineserver": "./bin/cineserver"
+  },
+  "dependencies": {
+    "peerflix": "latest",
+    "pickle": "latest",
+    "auto-loader": "latest",
+    "cheerio": "latest",
+    "request": "latest",
+    "inherit": "latest",
+    "difflib": "latest",
+    "express": "3.x"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
