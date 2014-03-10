@@ -3,7 +3,8 @@ var inherit = require('inherit');
 var Provider = inherit({
 	__constructor : function() {
 		this.prov_type = [];
-	}
+	},
+	ready : false,
 });
 
 module.exports.MediaProvider = inherit(Provider, {

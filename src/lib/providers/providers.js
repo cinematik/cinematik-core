@@ -2,13 +2,19 @@
 var loader = require('auto-loader');
 var bases = require('./base.js');
 
-
-
 var	providers = {
 	media : {
 		search : function(string) {
-			// @todo: Wait for provider initialization before calling.
-			return this.__list[0].search(string);
+			var results = {};
+
+			for(p in this.__list) {
+				provider = this.__list[p];
+				if(provider.ready) {
+					results[provider.id] = provider.search(string);
+				}
+			}
+
+			return results;
 		},
 		__list : [],
 	}, 
@@ -44,6 +50,5 @@ function loadProviders() {
 
 	return providers;
 }
-
 
 module.exports = loadProviders();

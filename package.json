@@ -17,6 +17,7 @@
     "cineserver": "./bin/cineserver"
   },
   "dependencies": {
+    "q": "latest",
     "peerflix": "latest",
     "pickle": "latest",
     "auto-loader": "latest",
