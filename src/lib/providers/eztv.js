@@ -91,7 +91,6 @@ var EZTVProvider = inherit(bases.MediaProvider, {
 				            }
 				        });
 	            	});
-	            	
 	            }
 	        });
 
