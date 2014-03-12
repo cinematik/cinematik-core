@@ -1,9 +1,23 @@
-
 var loader = require('auto-loader');
 var bases = require('./base.js');
 
-var	providers = {
-	media : {
+/**
+ * Instantiates Providers.
+ * @class Represents an instance of Providers. Only one needed.
+ */
+
+function Providers() {
+	var self = this;
+
+	self.media = {
+		getProvider : function(prov_id) {
+			for(p in this.__list) {
+				if (this.__list[p].id == prov_id) {
+					return this.__list[p];
+				}
+			}
+			return null;
+		},
 		search : function(string) {
 			var results = {};
 
@@ -17,38 +31,42 @@ var	providers = {
 			return results;
 		},
 		__list : [],
-	}, 
-	metadata : {
+	}; 
+
+	var	metadata = {
 		setMetadata : function(media) {
 		},
 		__list : [],
-	}
-};
+	};
+	
 
-function loadProviders() {
-	var modules = loader.load(__dirname);
-	console.log("Modules loaded",  modules);
+	self.init = function(mediaModule) {
+		var modules = loader.load(__dirname);
+		console.log("Modules loaded",  modules);
 
-	for (var module in modules) {
-		if(module == 'base' || module == 'providers' || module == '_path') {
-			delete modules[module];
-			continue;
+		for (var module in modules) {
+			if(module == 'base' || module == 'providers' || module == '_path') {
+				delete modules[module];
+				continue;
+			}
+			var provider = new modules[module](bases, mediaModule);
+			console.log(module, provider);
+
+			if(provider instanceof bases.MediaProvider) {
+				providers.media.__list.push(provider);
+			}
+
+			if(provider instanceof bases.MetadataProvider) {
+				providers.metadata.__list.push(provider);
+			}
 		}
-		var provider = new modules[module]();
-		console.log(module, provider);
 
-		if(provider instanceof bases.MediaProvider) {
-			providers.media.__list.push(provider);
-		}
+		console.log("Providers", providers); 
 
-		if(provider instanceof bases.MetadataProvider) {
-			providers.metadata.__list.push(provider);
-		}
-	}
+	};
 
-	console.log("Providers", providers); 
 
-	return providers;
 }
-
-module.exports = loadProviders();
+ 
+var providers = new Providers();
+module.exports = providers;

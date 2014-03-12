@@ -25,6 +25,7 @@
     "request": "latest",
     "inherit": "latest",
     "difflib": "latest",
+    "lru-cache": "latest",
     "node-uuid": "latest",
     "express": "3.x"
   },
