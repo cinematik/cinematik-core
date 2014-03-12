@@ -33,7 +33,7 @@ function Providers() {
 		__list : [],
 	}; 
 
-	var	metadata = {
+	self.metadata = {
 		setMetadata : function(media) {
 		},
 		__list : [],
