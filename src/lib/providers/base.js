@@ -5,6 +5,9 @@ var Provider = inherit({
 		this.prov_type = [];
 	},
 	ready : false,
+},
+{
+	id: new Error("Please set an ID for the provider"),
 });
 
 module.exports.MediaProvider = inherit(Provider, {
@@ -14,7 +17,6 @@ module.exports.MediaProvider = inherit(Provider, {
 	},
 }, 
 {
-	id: new Error("Please set an ID for the provider"),
 	search : function() {
 		return new Error("Please override this function");	
 	},
@@ -27,7 +29,6 @@ module.exports.MetadataProvider = inherit(Provider, {
 	},
 }, 
 {
-	id: new Error("Please set an ID for the provider"),
 	setMetadata : function() {
 		return new Error("Please override this function");	
 	},
